@@ -1,31 +1,58 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import axios from 'axios';
+
+import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
+
+
+import { store } from "./store";
+
+export default {
+  components: {
+    AppHeader,
+    AppMain
+  },
+  data() {
+    return {
+      store
+    }
+  },
+  methods: {
+    getFilms () {
+      this.store.loading = true;
+      let apiUrl = this.store.apiURL;
+
+      if (this.store.searchKey !== "") {
+        apiUrl += this.store.searchKey;
+      }
+
+      axios.get(apiUrl)
+      .then((resp) => {
+        console.log(resp.data.results);
+        this.store.FilmList = resp.data.results;
+      })
+    }
+  }
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="container">
+    <AppHeader @doSearch="getFilms"/>
+    <AppMain />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+<style lang="scss">
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.container {
+  height: 100vh;
+  width: 100%;
 }
 </style>
