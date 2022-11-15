@@ -21,10 +21,8 @@ export default {
     getFilms () {
       this.store.loading = true;
       let filmApiUrl = this.store.movieApiUrl;
-      // let tvApiUrl = "https://api.themoviedb.org/3/search/tv?api_key=428a534dc99184a26882bfe1e1bcad65&query=";
       if (this.store.searchKey !== "") {
         filmApiUrl += this.store.searchKey;
-        // tvApiUrl += this.store.searchKey;
       }
 
       axios.get(filmApiUrl)
@@ -33,11 +31,7 @@ export default {
         this.store.FilmList = resp.data.results;
       })
 
-      // axios.get(tvApiUrl)
-      // .then((resp) => {
-      //   console.log(resp.data.results);
-      //   this.store.FilmList += resp.data.results;
-      // })
+
       let serieApiUrl = this.store.tvApiUrl;
       if (this.store.searchKey !== "") {
         serieApiUrl += this.store.searchKey;
@@ -47,6 +41,11 @@ export default {
       .then((resp) => {
         console.log(resp.data.results);
         this.store.seriesList = resp.data.results;
+      })
+
+      axios.get("https://api.themoviedb.org/3/movie/624860?api_key=428a534dc99184a26882bfe1e1bcad65&language=en-US")
+      .then((resp) => {
+        console.log(resp.data);
       })
     }
   }
