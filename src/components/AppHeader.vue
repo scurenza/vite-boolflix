@@ -52,6 +52,10 @@ header{
             color: white;
             margin-right: 1rem;
         }
+
+        input {
+            margin-right: 1rem;
+        }
     }
 
 }

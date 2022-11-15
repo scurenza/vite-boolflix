@@ -39,7 +39,7 @@ export default {
 
 section h1{
     width: 80%;
-    margin: 0 auto;
+    margin: 3rem auto 1.5rem;
 
     font-size: 3rem;
     color: grey;
