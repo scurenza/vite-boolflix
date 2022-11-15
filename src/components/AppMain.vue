@@ -16,18 +16,43 @@ export default {
 </script>
 
 <template>
-    <div class="row">
-        <div class="card" v-for="film in store.FilmList" :key="film.id">
-            <FilmCard :film="film" />
+    <section class="Films">
+        <h1>Film</h1>
+        <div class="row">
+            <div class="card" v-for="film in store.FilmList" :key="film.id">
+                <FilmCard :film="film" />
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="Tv">
+        <h1>Tv Series</h1>
+        <div class="row">
+            <div class="card" v-for="film in store.seriesList" :key="film.id">
+                <FilmCard :film="film" />
+            </div>
+        </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
-.row {
+
+section h1{
     width: 80%;
-    margin: 2rem auto;
+    margin: 0 auto;
+
+    font-size: 3rem;
+    color: grey;
+    text-decoration: underline;
+}
+.Films {
+    margin-top: 7rem;
+}
+.row {
+    width: 70%;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 </style>
