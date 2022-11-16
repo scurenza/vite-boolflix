@@ -43,9 +43,11 @@ export default {
         this.store.seriesList = resp.data.results;
       })
 
-      axios.get("https://api.themoviedb.org/3/movie/624860?api_key=428a534dc99184a26882bfe1e1bcad65&language=en-US")
+      axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=428a534dc99184a26882bfe1e1bcad65&language=en-US")
       .then((resp) => {
-        console.log(resp.data);
+        console.log(resp.data.genres);
+        this.store.genres = resp.data.genres;
+        console.log(this.store.genres);
       })
     }
   }
