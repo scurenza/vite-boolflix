@@ -14,22 +14,21 @@ export default {
             cast: []
         }
     },
+    created() {
+            let id = this.film.id;
+            let castApiUrl = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=428a534dc99184a26882bfe1e1bcad65`;
+            axios.get(castApiUrl)
+            .then((resp) => {
+                this.cast = resp.data.cast;
+                console.log(resp.data.cast);
+            })  
+    },
     computed: {
         getTitle () {
             return this.film.title ? this.film.title : this.film.name;
         },
         getOriginalTitle () {
             return this.film.original_title ? this.film.original_title : this.film.original_name;
-        },
-        getCast () {
-            let id = this.film.id;
-            let castApiUrl = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=428a534dc99184a26882bfe1e1bcad65`;
-            axios.get(castApiUrl)
-            .then((resp) => {
-                this.cast = resp.data;
-                console.log(resp.data);
-                return this.cast;
-            })
         }
     }
 }
@@ -52,7 +51,7 @@ export default {
             <span v-for="number in Math.round(film.vote_average / 2)"><i class="fa-solid fa-star"></i></span>
             <span v-for="num in (5 - Math.round(film.vote_average / 2))"><i class="fa-regular fa-star"></i></span>
             <p class="genre">Cast:</p>
-            <span>{{ getCast }}</span>
+                <span v-for="(person, index) in 5" :key="index">{{ cast }}</span>      
         </div>
     </div>
 </template>
